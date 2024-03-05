@@ -22,15 +22,7 @@ const {
   videoCallToken,
 } = require("../controllers/auth/userController");
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "./uploads");
-  },
-  filename: (req, file, cb) => {
-    const ext = file.originalname.split(".").pop();
-    cb(null, `profile-${Date.now()}.${ext}`);
-  },
-});
+const storage = multer.diskStorage({});
 
 const upload = multer({
   storage,
@@ -39,7 +31,7 @@ const upload = multer({
   },
 });
 
-router.post("/upload", uploadImageCloudinary);
+router.post("/upload", upload.single("image"), uploadImageCloudinary);
 router.post("/signup", registerUser);
 router.post("/signin", loginUser);
 router.get("/profile", authenticateToken, profileData);
