@@ -5,6 +5,13 @@ const UserLogin = require("../../model/auth/login");
 const Notification = require("../../model/notification/notification");
 const ChatMessage = require("../../model/chats/chats");
 const { StreamChat } = require("stream-chat");
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  cloud_name: "djtsjuqyi",
+  api_key: "225368946457134",
+  api_secret: "iGO_xUkipR8D_7a2M6ht7bs3IrA",
+});
 
 const fs = require("fs");
 
@@ -104,6 +111,23 @@ const loginUser = async (req, res, next) => {
   } catch (error) {
     next(error);
     res.status(500).json({ message: "Server error" });
+  }
+};
+
+const uploadImageCloudinary = async (req, res) => {
+  try {
+    console.log(req.file);
+
+    const imagePath = req.file.path.replace(/\\/g, "/");
+
+    const imageUrl = await cloudinary.uploader.upload(imagePath);
+    console.log("imageUrl", imageUrl);
+    const secureUrl = imageUrl.secure_url;
+
+    res.status(200).json({ secureUrl });
+  } catch (error) {
+    console.error("Error uploading image:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -426,7 +450,7 @@ module.exports = {
   updateProfileData,
   getAllUsers,
   likeUser,
-  uploadImage,
+  uploadImageCloudinary,
   getNotificationsByUserId,
   deleteNotification,
   postMessage,

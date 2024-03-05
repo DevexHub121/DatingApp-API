@@ -12,7 +12,7 @@ const {
   updateProfileData,
   getAllUsers,
   likeUser,
-  uploadImage,
+  uploadImageCloudinary,
   getNotificationsByUserId,
   deleteNotification,
   postMessage,
@@ -39,7 +39,7 @@ const upload = multer({
   },
 });
 
-router.post("/upload", upload.single("image"), uploadImage);
+router.post("/upload", upload.single("image"), uploadImageCloudinary);
 router.post("/signup", registerUser);
 router.post("/signin", loginUser);
 router.get("/profile", authenticateToken, profileData);
