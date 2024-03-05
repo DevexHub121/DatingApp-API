@@ -382,7 +382,7 @@ const uploadImage = async (req, res) => {
 
     const imagePath = req.file.path.replace(/\\/g, "/");
 
-    const imageUrl = `${req.protocol}://${req.get("host")}/${imagePath}`;
+    const imageUrl = `https://dating-app-api-five.vercel.app/${imagePath}`;
     console.log("imageUrl", imageUrl);
 
     res.status(200).json({ imageUrl });
