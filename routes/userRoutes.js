@@ -39,7 +39,7 @@ const upload = multer({
   },
 });
 
-router.post("/upload", upload.single("image"), uploadImageCloudinary);
+router.post("/upload", uploadImageCloudinary);
 router.post("/signup", registerUser);
 router.post("/signin", loginUser);
 router.get("/profile", authenticateToken, profileData);
