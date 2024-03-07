@@ -33,7 +33,7 @@ app.use(express.json({ strict: false }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use(cors({ origin: "http://10.0.2.2:8000" }));
+app.use(cors());
 app.use("/api/user", userRoutes);
 
 // Connect to the database and start the server
