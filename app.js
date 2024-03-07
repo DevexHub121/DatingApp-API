@@ -84,7 +84,7 @@ app.use(express.json({ strict: false }));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/uploads", express.static(path.join(__dirname, "uploads")));
-app.use(cors({ origin: "https://dating-app-api-five.vercel.app" }));
+app.use(cors({ origin: "https://10.0.2.2:8000" }));
 app.use("/api/user", userRoutes);
 
 // Connect to the database and start the server
